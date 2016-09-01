@@ -48,6 +48,6 @@ run: iso
 	qemu-system-i386 -cdrom $(NAME).iso -m 1G
 
 clean:
-	rm -f $(NAME).kernel $(OBJS)
+	rm -Rf $(NAME).kernel $(OBJS) $(NAME).iso sysroot iso/boot/$(NAME).kernel
 todo:
 	grep -r TODO .
