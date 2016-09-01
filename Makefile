@@ -49,3 +49,5 @@ run: iso
 
 clean:
 	rm -f $(NAME).kernel $(OBJS)
+todo:
+	grep -r TODO .
