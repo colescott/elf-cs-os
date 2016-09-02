@@ -13,7 +13,7 @@ CFLAGS := -std=gnu99 -ffreestanding -O2 $(WARNINGS)
 CPPFLAGS := -ffreestanding -O2 $(WARNINGS) -fno-exceptions -fno-rtti
 
 SRCFILES=$(shell find kernel/ -type f -name '*.c') $(shell find kernel/ -type f -name '*.s') $(shell find kernel/ -type f -name '*.cpp')
-OBJS = $(patsubst kernel/%.c,kernel/%.o,$(SRCFILES))
+OBJS =$(patsubst kernel/%.c,kernel/%.o,$(shell find kernel/ -type f -name '*.c')) $(patsubst kernel/%.s,kernel/%.o,$(shell find kernel/ -type f -name '*.s')) $(patsubst kernel/%.cpp,kernel/%.o,$(shell find kernel/ -type f -name '*.cpp'))
 
 LINKERLD = kernel/boot/linker.ld
 LINKERFLAGS = -ffreestanding -O2 -nostdlib -lgcc
