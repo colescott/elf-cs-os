@@ -37,17 +37,15 @@ elf-cs-os.kernel: $(OBJS)
 install: install-headers install-kernel
 
 install-kernel: $(NAME).kernel
-	mkdir -p sysroot/boot
-	cp $(NAME).kernel sysroot/boot
+	cp $(NAME).kernel iso/boot
 
 iso: install-kernel
-	cp sysroot/boot/$(NAME).kernel iso/boot/$(NAME).kernel
 	grub-mkrescue -o $(NAME).iso iso
 
 run: iso
 	qemu-system-i386 -cdrom $(NAME).iso -m 1G
 
 clean:
-	rm -Rf $(NAME).kernel $(OBJS) $(NAME).iso sysroot iso/boot/$(NAME).kernel
+	rm -Rf $(NAME).kernel $(OBJS) $(NAME).iso iso/boot/$(NAME).kernel
 todo:
 	grep -r TODO .
