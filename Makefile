@@ -12,13 +12,13 @@ WARNINGS := -Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align \
 CFLAGS := -std=gnu99 -ffreestanding -O2 $(WARNINGS)
 CPPFLAGS := -ffreestanding -O2 $(WARNINGS) -fno-exceptions -fno-rtti
 
-SRCFILES=$(shell find kernel/ -type f -name '*.c') $(shell find kernel/ -type f -name '*.s') $(shell find kernel/ -type f -name '*.cpp')
-OBJS =$(patsubst kernel/%.c,kernel/%.o,$(shell find kernel/ -type f -name '*.c')) $(patsubst kernel/%.s,kernel/%.o,$(shell find kernel/ -type f -name '*.s')) $(patsubst kernel/%.cpp,kernel/%.o,$(shell find kernel/ -type f -name '*.cpp'))
+SRCFILES=$(shell find . -type f -name '*.c') $(shell find . -type f -name '*.s') $(shell find . -type f -name '*.cpp')
+OBJS =$(patsubst %.c,%.o,$(shell find . -type f -name '*.c')) $(patsubst %.s,%.o,$(shell find . -type f -name '*.s')) $(patsubst %.cpp,%.o,$(shell find . -type f -name '*.cpp'))
 
 LINKERLD = kernel/boot/linker.ld
 LINKERFLAGS = -ffreestanding -O2 -nostdlib -lgcc
 
-HEADERFILES = $(addprefix -I, $(shell find kernel/include -type d -print))
+HEADERFILES = $(addprefix -I, $(shell find kernel/include -type d -print)) $(addprefix -I, $(shell find libc/include -type d -print))
 
 all: $(NAME).kernel
 
