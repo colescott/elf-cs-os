@@ -26,6 +26,9 @@ _start:
 	# set stack pointer to top of stack
 	movl $stack_top, %esp
 
+    push %eax # pass multiboot magic number to kernel_early
+    push %ebx # pass multiboot info to kernel_early
+
 	# Run early kernel stuff
 	call kernel_early
 
