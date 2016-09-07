@@ -5,9 +5,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-//TODO: move panic to its own file
-void panic(char* str);
-
 void kernel_early(multiboot_info_t* mbd, unsigned int magic)
 {
     initTty();
@@ -44,13 +41,4 @@ void kernel_main(void)
 {
     printf("Hello, kernel world!");
     while(true) {}
-}
-
-void panic(char* str)
-{
-    printf("KERNEL PANIC: ");
-    printf(str);
-    printf("\nHALTING SYSTEM.");
-    asm volatile ( "cli" );
-    asm volatile ( "hlt" );
 }
