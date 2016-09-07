@@ -13,7 +13,7 @@ uint8_t x = 0;
 uint8_t y = 0;
 uint16_t color;
 
-void initTty()
+void initTty() //TODO: implement virtual tty (maybe more han one)
 {
     color = make_color(LIGHT_GRAY, BLACK);
 
@@ -24,13 +24,27 @@ void initTty()
 
 void putChar(char c)
 {
-    putCharAt(c, color, x, y);
-    if(++x >= TTY_WIDTH)
+    if(c == '\t')
+    {
+        for(int i = 0; i <3 /* i luvs u */; i++ ) //TODO: move tab length to defined value in tty.h
+            putChar(' ');
+    } else if(c == '\n')
     {
         x = 0;
         if(++y >= TTY_HEIGHT)
         {
             y = 0;
+        }
+    } else if(c != 0)
+    {
+        putCharAt(c, color, x, y);
+        if(++x >= TTY_WIDTH)
+        {
+            x = 0;
+            if(++y >= TTY_HEIGHT)
+            {
+                y = 0;
+            }
         }
     }
 
